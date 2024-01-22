@@ -35,16 +35,11 @@ jobs:
       with:
         arguments: build
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          [Remeber to insert a description later]
-        draft: false
-        prerelease: true
-        body_path: ./build/libs/*.jar
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/libs/*.jar
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true
