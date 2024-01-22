@@ -47,6 +47,5 @@ jobs:
           [Remeber to insert a description later]
         draft: false
         prerelease: true
-      with:
         name: release
         path: build/libs/*.jar
