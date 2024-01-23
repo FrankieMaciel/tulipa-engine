@@ -34,16 +34,18 @@ jobs:
       with:
         arguments: build
 
-    - id: 'read_release'
-    shell: bash
-    run: |
-      r=$(cat ./README.md)                       # <--- Read release.md (Provide correct path as per your repo)
-      r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
-      r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
-      r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
-      echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
+    - name: Create release body
+      id: read_release
+      shell: bash
+      run: |
+        r=$(cat ./README.md)                       # <--- Read release.md (Provide correct path as per your repo)
+        r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
+        r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
+        r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
+        echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
       
-    - id: 'commit'
+    - name: Get commit hash
+      id: commit
       uses: prompt/actions-commit-hash@v3
       with:
         commit: "${{ github.event.workflow_run.head_sha }}"
