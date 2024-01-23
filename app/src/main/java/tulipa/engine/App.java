@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "Olá mundo!";
     }
 
     public static void main(String[] args) {
