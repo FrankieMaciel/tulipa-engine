@@ -14,9 +14,9 @@ public class App {
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
 
-        JFrame janela = new JFrame("Tulipa");
+        JFrame janela = new JFrame("Tulipa Engine");
 
-        JLabel rotulo = new JLabel("Teste de janela da Tulipa Engine");
+        JLabel rotulo = new JLabel("teste da tulipa");
 
         janela.add(rotulo);
 

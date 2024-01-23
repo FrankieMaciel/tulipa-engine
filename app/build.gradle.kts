@@ -46,3 +46,9 @@ tasks.register("publish") {
     // Configurações da tarefa 'publish'
     // ...
 }
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "tulipa.engine.App"
+    }
+}
