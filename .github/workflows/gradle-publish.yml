@@ -47,9 +47,6 @@ jobs:
     - name: Get commit hash
       id: commit
       uses: prompt/actions-commit-hash@v3
-      with:
-        commit: "${{ github.event.workflow_run.head_sha }}"
-        prefix: "sha-"
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
