@@ -19,12 +19,6 @@ jobs:
     permissions: write-all
 
     steps:
-    - name: Create tag
-        id: commit
-        uses: prompt/actions-commit-hash@v3
-        with:
-          commit: "${{ github.event.workflow_run.head_sha }}"
-          prefix: "sha-"
 
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -49,6 +43,12 @@ jobs:
           r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
           r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
           echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
+      
+    - id: commit
+      uses: prompt/actions-commit-hash@v3
+      with:
+        commit: "${{ github.event.workflow_run.head_sha }}"
+        prefix: "sha-"
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
