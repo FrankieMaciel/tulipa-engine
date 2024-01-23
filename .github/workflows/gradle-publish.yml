@@ -33,12 +33,19 @@ jobs:
       with:
         arguments: build
 
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+    - name: Create Release and Tag
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ steps.commit_hash.outputs.hash }}
+        release_name: Release ${{ github.event.ref }}
         file: ./app/build/libs/app.jar
         asset_name: tulipa.jar
-        tag: ${{ github.event.ref }}
-        overwrite: true
-        file_glob: true
+        body: |
+          Changes in this Release
+          - First Change
+          - Second Change
+        draft: false
+        prerelease: true
