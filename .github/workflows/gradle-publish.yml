@@ -37,7 +37,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./app/build/libs/*.jar
+        file: ./app/build/libs/app.jar
         asset_name: mything
         tag: ${{ github.ref }}
         overwrite: true
